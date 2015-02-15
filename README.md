@@ -1,5 +1,5 @@
 # HandShare
-#### Connect with others with a simple handshake
+###### Handshare is a way to connect with people seamlessly, without losing the physical connection of a business interaction
 
 ### Required Software
 ---
