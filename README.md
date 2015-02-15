@@ -30,7 +30,7 @@
 
 Try moving or copying the Evothings Studio folder into the same directory as the cloned HandShare project
 
-> When I try to connect to the *"Connect URL"*, I get *"Webpage not available"*
+> When I try to connect to the *"Connect URL"*, I get *"Webpage not available"*.
 
 This may be a problem with your internet connection. Make sure airplane mode is turned off, and that you can connect to the internet.
 
@@ -40,7 +40,7 @@ There may be a problem with the code. **Please message one of the authors or sub
 
 ### Authors
 ---
-Fred Cao (([@derfc](https://github.com/fredcao)) <br />
+Fred Cao ([@derfc](https://github.com/fredcao)) <br />
 Jerry Bai ([@baijerry](https://github.com/baijerry)) <br />
 Shawn Deol ([@shawn-deol](https://github.com/shawn-deol)) <br />
 Stephanie Koehl ([@StephanieKoehl](https://github.com/StephanieKoehl)) <br />
