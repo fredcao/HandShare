@@ -40,7 +40,7 @@ There may be a problem with the code. **Please message one of the authors or sub
 
 ### Authors
 ---
-Fred Cao ([@derfc])(https://github.com/fredcao) <br />
-Jerry Bai ([@baijerry])(https://github.com/baijerry) <br />
-Shawn Deol ([@shawn-deol])(https://github.com/shawn-deol) <br />
-Stephanie Koehl ([@StephanieKoehl])(https://github.com/StephanieKoehl) <br />
+Fred Cao (([@derfc](https://github.com/fredcao)) <br />
+Jerry Bai ([@baijerry](https://github.com/baijerry)) <br />
+Shawn Deol ([@shawn-deol](https://github.com/shawn-deol)) <br />
+Stephanie Koehl ([@StephanieKoehl](https://github.com/StephanieKoehl)) <br />
