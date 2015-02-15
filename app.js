@@ -23,13 +23,14 @@ var app = (function()
 		startScan();
 
 		// Display refresh timer.
-		updateTimer = setInterval(displayBeaconList, 500);
+		updateTimer = setInterval(displayBeaconList, 200);
 	}
 
 	function startScan()
 	{
 		function onBeaconsRanged(beaconInfo)
 		{
+
 			//console.log('onBeaconsRanged: ' + JSON.stringify(beaconInfo))
 			for (var i in beaconInfo.beacons)
 			{
@@ -37,8 +38,33 @@ var app = (function()
 				var beacon = beaconInfo.beacons[i];
 				beacon.timeStamp = Date.now();
 				var key = beacon.uuid + ':' + beacon.major + ':' + beacon.minor;
-				beacons[key] = beacon;
+				// Hardcoded to the Estimotes we borrowed
+				if ((beacon.major === 9905) && (beacon.minor === 54875)) {
+					if (!existsClient(beacon.major, beacon.minor)) {
+						//$("#debug").append($("<div>[onBeaconsRanged] Client does not exist</div>"));
+						createNewClient(beacon.major, beacon.minor, "email1", "Hello, it was nice meeting you at deltaHacks today. Would you like to connect on Facebook?", beacon, true);
+					}
+					else {
+						//$("#debug").append($("<div>[onBeaconsRanged] Client exists, update</div>"));
+						updateClient(beacon.major, beacon.minor, beacon);
+					}
+					beacons[key] = beacon;
+				}
+				else if ((beacon.major === 51224) && (beacon.minor === 48474)) {
+					if (!existsClient(beacon.major, beacon.minor)) {
+						//$("#debug").append($("<div>[onBeaconsRanged] Client does not exist</div>"));
+						createNewClient(beacon.major, beacon.minor, "email2", "Hi, it was great talking with you today. Would you like to connect on Twitter?", beacon, true);
+					}
+					else {
+						//$("#debug").append($("<div>[onBeaconsRanged] Client exists, update</div>"));
+						updateClient(beacon.major, beacon.minor, beacon);
+					}
+					beacons[key] = beacon;
+				}
+				// Major 9905 Minor 54875
+				// Major 51224 Minor 48474
 			}
+			findHandshakes();
 		}
 
 		function onError(errorMessage)
@@ -68,8 +94,8 @@ var app = (function()
 		// Update beacon list.
 		$.each(beacons, function(key, beacon)
 		{
-			// Only show beacons that are updated during the last 60 seconds.
-			if (beacon.timeStamp + 60000 > timeNow)
+			// Only show beacons that are updated during the last 5 seconds.
+			if (beacon.timeStamp + 5000 > timeNow)
 			{
 				// Create tag to display beacon data.
 				var element = $(
@@ -79,6 +105,9 @@ var app = (function()
 					+	proximityHTML(beacon)
 					+	distanceHTML(beacon)
 					+	rssiHTML(beacon)
+					+	'UUID: ' + beacon.proximityUUID + '<br />'
+					+   'NAME: ' + beacon.name + '<br />'
+					+   'UUID2: ' + beacon.motionProximityUUID + '<br />'
 					+ '</li>'
 				);
 
