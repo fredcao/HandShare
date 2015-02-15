@@ -8,7 +8,8 @@
 * Evothings Client App
   * [Download for Android](https://play.google.com/store/apps/details?id=com.evothings.evothingsclient&hl=en)
   * [Download for iOS](https://itunes.apple.com/app/evothings-client/id848974292?mt=8)
-* An internet connection
+* A Bluetooth connection
+* An Internet connection
 
 ### Running the Application
 ---
