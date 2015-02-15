@@ -1,7 +1,8 @@
 # HandShare
-##### Connect with others with a simple handshake
+#### Connect with others with a simple handshake
 
 ### Required Software
+---
 * [Node.js](http://nodejs.org/download/)
 * [Evothings Workbench](http://evothings.com/download/)
 * Evothings Client App
@@ -10,7 +11,7 @@
 * An internet connection
 
 ### Running the Application
-
+---
 #### Server and Application Setup
 1. Download/clone the repository
 2. Open the Evothings Workbench
@@ -24,17 +25,22 @@
 **You can have many active client connections at the same time.** In the Evothings Workbench, in the box for *"HandShare"*, press *"Run"*. All clients should then be running the application.
 
 ### Troubleshooting
+---
 > My Evothings Workbench crashed when I dragged the project into the window!
+
 Try moving or copying the Evothings Studio folder into the same directory as the cloned HandShare project
 
 > When I try to connect to the *"Connect URL"*, I get *"Webpage not available"*
+
 This may be a problem with your internet connection. Make sure airplane mode is turned off, and that you can connect to the internet.
 
 > I connected my client(s) using the Evothings Client App. When I press *"Run"*, nothing shows up.
+
 There may be a problem with the code. **Please message one of the authors or submit an issue.**
 
 ### Authors
-Fred Cao [(@derfc)](https://github.com/fredcao) <br />
-Jerry Bai [(@baijerry)](https://github.com/baijerry) <br />
-Shawn Deol [(@shawn-deol)](https://github.com/shawn-deol) <br />
-Stephanie Koehl [(@StephanieKoehl)](https://github.com/StephanieKoehl) <br />
+---
+Fred Cao ([@derfc])(https://github.com/fredcao) <br />
+Jerry Bai ([@baijerry])(https://github.com/baijerry) <br />
+Shawn Deol ([@shawn-deol])(https://github.com/shawn-deol) <br />
+Stephanie Koehl ([@StephanieKoehl])(https://github.com/StephanieKoehl) <br />
