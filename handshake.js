@@ -5,7 +5,8 @@ var CLIENT_TEMPLATE = {
     "ESTIMOTE": null
 };
 var HANDSHAKE_DISTANCE = 0.3; // Handshake trigger in meters
-var TRIGGER_COUNT_REQ = 5;
+var TRIGGER_COUNT_REQ = 2;
+var TRIGGER_RSSI_REQ = -80;
 // Global variables
 var arrClients        = [];
 var arrClientsIds     = [];
@@ -16,9 +17,6 @@ var count = 0;
 
 function createNewClient(major, minor, email, message, estimote, pushToArr) {
     if (stop) return;
-    // $("#debug").append($("<div>[createNewClient] Called </div>"));
-    // $("#debug").append($("<div>[createNewClient] Major: " + major + " </div>"));
-    // $("#debug").append($("<div>[createNewClient] Minor: " + minor + " </div>"));
     var est         = {};
     $.extend(est, CLIENT_TEMPLATE);
     est.EMAIL       = email;
@@ -28,36 +26,16 @@ function createNewClient(major, minor, email, message, estimote, pushToArr) {
         arrClients.push(est);
         arrClientsIds.push(major.toString() + minor.toString());
     }
-    //count++;
-    // $("#debug").append($("<div>[createNewClient] count: " + count + "</div>"));
-    // $("#debug").append($("<div>[createNewClient] major1: " + arrClients[0].ESTIMOTE.major + "</div>"));
-    // $("#debug").append($("<div>[createNewClient] minor1: " + arrClients[0].ESTIMOTE.minor + "</div>"));
-    // $("#debug").append($("<div>[createNewClient] major2: " + arrClients[1].ESTIMOTE.major + "</div>"));
-    // $("#debug").append($("<div>[createNewClient] minor1: " + arrClients[1].ESTIMOTE.minor + "</div>"));
-
-    // if (count === 2) {
-    //     stop = true;
-    // }
     return est;
 }
 
 function updateClient(major, minor, estimote) {
     if (stop) return;
-    // $("#debug").append($("<div>[updateClient] Major: " + major + " </div>"));
-    // $("#debug").append($("<div>[updateClient] Minor: " + minor + " </div>"));
-    // $("#debug").append($("<div>[updateClient] ESTMajor: " + estimote.major + " </div>"));
-    // $("#debug").append($("<div>[updateClient] ESTMinor: " + estimote.minor + " </div>"));
-    // $("#debug").append($("<div>[updateClient] Called </div>"));
     var index = arrClientsIds.indexOf(major.toString() + minor.toString());
-    //$("#debug").append($("<div>[updateClient] Index " + index + " </div>"));
     if (index === -1) {
         $("#debug").append($("[updateClient] Can not find client <br />"));
     }
     arrClients[index].ESTIMOTE = estimote;
-    // count++;
-    // if (count === 2) {
-    //     stop = true;
-    // }
 }
 
 function existsClient(major, minor) {
@@ -89,36 +67,24 @@ function popClient(client) {
 
 function isHandshake(est1, est2) {
     if (stop) return;
-    // $("#debug").empty();
-    // $("#debug").append($("<div>[isHandshake] est1.distance " + est1.distance + " est2.distance " + est2.distance + " </div>"));
-    // $("#debug").append($("<div>[isHandshake] Math.abs(diff) " + Math.abs(est1.distance - est2.distance) + " </div>"));
-    return (est1 !== null) && (est2 !== null) && (Math.abs(est1.distance - est2.distance) < HANDSHAKE_DISTANCE);
-    stop = true;
+    var isHandshake = (est1 !== null) && (est2 !== null) && (parseInt(est1.rssi) > TRIGGER_RSSI_REQ) && (parseInt(est2.rssi) > TRIGGER_RSSI_REQ) && (Math.abs(est1.distance - est2.distance) < HANDSHAKE_DISTANCE);
+    return isHandshake;
 }
 
 function processShake(client1, client2) {
     if (stop) return;
     count++;
-    // $("#debug").append($("<div>Trigger " + count + " at " + Date.now().toString() + "</div>"));
     if (count != TRIGGER_COUNT_REQ) return;
-    // TODO: process a shake between client1 and client2
-    // This would be a notification/email
-    //alert("Handshake detected");
     var element = $("<div>Handshake detected</div>");
     $("#handshakes").append(element);
     stop = true;
+    window.open("mailto:" + arrClients[1].EMAIL + "?subject=DeltaHacks Connection&body=" + arrClients[1].MESSAGE);
 }
 
 function findHandshakes() {
     //called = true;
     if (stop) return;
     if (called) return;
-    //$("#debug").empty();
-    // $("#debug").append($("<div>[findHandshakes] Called </div>"));
-    // $("#debug").append($("<div>[findHandshakes] major1: " + arrClients[0].ESTIMOTE.major + "</div>"));
-    // $("#debug").append($("<div>[findHandshakes] minor1: " + arrClients[0].ESTIMOTE.minor + "</div>"));
-    // $("#debug").append($("<div>[findHandshakes] major2: " + arrClients[1].ESTIMOTE.major + "</div>"));
-    // $("#debug").append($("<div>[findHandshakes] minor1: " + arrClients[1].ESTIMOTE.minor + "</div>"));
     var copyArr = arrClients;
     for (var i = 0; i < copyArr.length; i++) {
         for (var j = i + 1; j < copyArr.length; j++) {
@@ -127,12 +93,10 @@ function findHandshakes() {
             }
         }
     }
-    // called = true;
 }
 
 
 function findClients() {
     if (stop) return;
     // Find devices and register them as clients
-    // Hardcoded clients for POC purposes
 }

@@ -23,7 +23,7 @@ var app = (function()
 		startScan();
 
 		// Display refresh timer.
-		updateTimer = setInterval(displayBeaconList, 200);
+		updateTimer = setInterval(displayBeaconList, 400);
 	}
 
 	function startScan()
@@ -42,7 +42,7 @@ var app = (function()
 				if ((beacon.major === 9905) && (beacon.minor === 54875)) {
 					if (!existsClient(beacon.major, beacon.minor)) {
 						//$("#debug").append($("<div>[onBeaconsRanged] Client does not exist</div>"));
-						createNewClient(beacon.major, beacon.minor, "email1", "Hello, it was nice meeting you at deltaHacks today. Would you like to connect on Facebook?", beacon, true);
+						createNewClient(beacon.major, beacon.minor, "shawn-deol@gmail.com", "Hello, it was nice meeting you at deltaHacks today. Would you be interested in connecting with me over Facebook or LinkedIn?", beacon, true);
 					}
 					else {
 						//$("#debug").append($("<div>[onBeaconsRanged] Client exists, update</div>"));
@@ -53,7 +53,7 @@ var app = (function()
 				else if ((beacon.major === 51224) && (beacon.minor === 48474)) {
 					if (!existsClient(beacon.major, beacon.minor)) {
 						//$("#debug").append($("<div>[onBeaconsRanged] Client does not exist</div>"));
-						createNewClient(beacon.major, beacon.minor, "email2", "Hi, it was great talking with you today. Would you like to connect on Twitter?", beacon, true);
+						createNewClient(beacon.major, beacon.minor, "jerry.bai@gmail.com", "Hi, it was great talking with you today.Would you be interested in connecting with me over Facebook or LinkedIn?", beacon, true);
 					}
 					else {
 						//$("#debug").append($("<div>[onBeaconsRanged] Client exists, update</div>"));
@@ -86,6 +86,7 @@ var app = (function()
 
 	function displayBeaconList()
 	{
+		if (stop) return;
 		// Clear beacon list.
 		$('#found-beacons').empty();
 
@@ -100,14 +101,10 @@ var app = (function()
 				// Create tag to display beacon data.
 				var element = $(
 					'<li>'
-					+	'Major: ' + beacon.major + '<br />'
-					+	'Minor: ' + beacon.minor + '<br />'
+					+	'Major: ' + beacon.major + ' Minor: ' + beacon.minor + '<br />'
 					+	proximityHTML(beacon)
 					+	distanceHTML(beacon)
 					+	rssiHTML(beacon)
-					+	'UUID: ' + beacon.proximityUUID + '<br />'
-					+   'NAME: ' + beacon.name + '<br />'
-					+   'UUID2: ' + beacon.motionProximityUUID + '<br />'
 					+ '</li>'
 				);
 
