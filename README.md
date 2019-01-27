@@ -1,3 +1,5 @@
+HI its David
+
 # HandShare
 ###### Handshare is a way to connect with people seamlessly, without losing the physical connection of a business interaction
 
